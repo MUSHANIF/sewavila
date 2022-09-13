@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
+use Alert;
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -26,7 +28,20 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        if (auth()->user()->level == 2) {
+            toastr()->success('Salam sehat!', 'Selamat datang petugas!');
+            return '/dashboard';
+        }elseif(auth()->user()->level == 3){
+            toastr()->success('Salam sehat!', 'Selamat datang superadmin!');
+            return '/dashboardsuperadmin';
+        }
+        toastr()->success('Selamat datang!', 'Halo');
+        return '/';
+        
+    }
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.

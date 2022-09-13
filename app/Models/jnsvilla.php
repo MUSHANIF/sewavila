@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class jnsvilla extends Model
 {
     use HasFactory;
+    public function villa()
+    {
+        return $this->hasMany(villa::class, 'jnsID', 'id');
+    }
 }

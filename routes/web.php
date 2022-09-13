@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\produkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +20,8 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['petugas']], function () {
-    Route::get('/petugas', function () {
-        return view('test');
-    });
+    Route::get('/dashboard', [dashboardController::class, 'index']);
+    Route::resource('produk', produkController::class);
 });
 Route::group(['middleware' => ['user']], function () {
     Route::get('/user', function () {
