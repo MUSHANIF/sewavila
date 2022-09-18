@@ -3,7 +3,7 @@
 
   <div class="container" style="position: relative;">
     
-    <form action="{{ route('produk.store') }}" method="post" >
+    <form action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data" >
         @csrf
         <div class="form-group">
             <label for="formGroupExampleInput">Jenis Villa</label>
@@ -19,20 +19,26 @@
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput2">Harga</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" name="harga" value="{{ old('harga') }}">
+            <input type="number" class="form-control" id="formGroupExampleInput2" name="harga" value="{{ old('harga') }}">
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput2">Stok</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" name="stok" value="{{ old('stok') }}">
+            <input type="number" class="form-control" id="formGroupExampleInput2" name="stok" value="{{ old('stok') }}">
         </div>
       
             {{-- <input type="hidden" class="form-control" id="ProdID" name="level" value="ADMIN" required> --}}
        
         <div class="form-group">
             <label for="formGroupExampleInput">Deskripsi</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" name="deskripsi" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
         </div>
-
+        <div class="row mb-3 ">
+            <div class="col">
+               <label for="formFile" class="form-label">Foto Bukti</label>
+               <input class="form-control" type="file" name="image" id="image" />
+               <img id="preview-image-before-upload" src="" alt="" style="width: 250px" class="mt-3" />
+            </div>
+         </div>
          <button style="background-color: #FF9106; border: unset" type="submit" class="btn btn-primary mt-4">Tambah</button>
          <button type="reset" class="btn btn-danger mt-4">Reset</button>
     </form>

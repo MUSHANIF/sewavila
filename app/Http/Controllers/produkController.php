@@ -13,12 +13,12 @@ class produkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $cari = $request->cari;
         $datas =  villa::with([
             'jns'
-        ])->get();
-
+        ])->where('name','like',"%".$cari."%")->get();
         return view('petugas.produk.index', compact('datas'));
     }
 
@@ -48,9 +48,14 @@ class produkController extends Controller
         $model->name = $request->name;
         $model->harga = $request->harga;
         $model->stok = $request->stok;
-
+        $model->image = $request->image;
         $model->deskripsi = $request->deskripsi;
-       
+        if ($image = $request->file('image')) {
+            $destinationPath = 'assets/images/villa';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $model['image'] = "$profileImage";
+        }
 
 
         $validasi = Validator::make($data, [
@@ -58,13 +63,14 @@ class produkController extends Controller
            
             'harga' => 'required|max:15',
             'stok' => 'required',
+           
             'deskripsi' => 'required|max:255',
 
         ]);
         if ($validasi->fails()) {
             return redirect()->route('produk.create')->withInput()->withErrors($validasi);
         }
-
+       
         $model->save();
 
         toastr()->success('Berhasil di buat!', 'Sukses');
@@ -109,6 +115,7 @@ class produkController extends Controller
       
         $model->jnsID = $request->jnsID;
         $model->name = $request->name;
+      
         $model->harga = $request->harga;
         $model->stok = $request->stok;
 
@@ -117,17 +124,23 @@ class produkController extends Controller
 
 
         $validasi = Validator::make($data, [
-            'name' => 'required|max:255|unique:villas',
+            'name' => 'required|max:255',
            
             'harga' => 'required|max:15',
             'stok' => 'required',
+          
             'deskripsi' => 'required|max:255',
 
         ]);
         if ($validasi->fails()) {
-            return redirect()->route('produk.edit')->withInput()->withErrors($validasi);
+            return redirect()->route('produk.edit', $id)->withInput()->withErrors($validasi);
         }
-
+        if ($image = $request->file('image')) {
+            $destinationPath = 'assets/images/villa';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $model['image'] = "$profileImage";
+        }
         $model->save();
 
         toastr()->success('Berhasil di ubah!', 'Sukses');

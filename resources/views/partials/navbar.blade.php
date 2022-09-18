@@ -27,7 +27,7 @@
                Selamat Datang,{{ Auth::user()->name }}
              </a>
              <ul class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-               <li><a class="dropdown-item" href="">Dashboard</a></li>
+               <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                <li><a class="dropdown-item" href="{{ route('logout') }}"
                  onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">

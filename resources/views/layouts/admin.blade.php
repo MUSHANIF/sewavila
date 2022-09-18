@@ -36,7 +36,7 @@
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header" data-logobg="skin6">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand text-center" href="/">
                         <b class="logo-icon">
             
                             <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
@@ -45,10 +45,11 @@
                         </b>
                        
                         <span class="logo-text">
-                            <!-- dark Logo text -->
+                            {{-- <!-- dark Logo text -->
                             <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                             <!-- Light Logo text -->
-                            <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /> --}}
+                            <h2>Musvil</h2>
                         </span>
                     </a>
                   
@@ -62,14 +63,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                       
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="mdi mdi-magnify me-1"></i> <span class="font-16">Search</span></a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                    class="srh-btn"><i class="mdi mdi-window-close"></i></a>
-                            </form>
-                        </li>
+                       @yield('search')
                     </ul>
                    
                     <ul class="navbar-nav float-end">
@@ -101,6 +95,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav mt-5">
                     <ul id="sidebarnav">
+                    @can('petugas')
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/dashboard" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
@@ -108,7 +103,21 @@
                                 href="/produk" aria-expanded="false"><i
                                     class="mdi mdi-account-network"></i><span class="hide-menu">Produk</span></a>
                         </li>
-      
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="/jns" aria-expanded="false"><i
+                                class="mdi mdi-account-network"></i><span class="hide-menu">Jenis Villa</span></a>
+                    </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="/laporan" aria-expanded="false"><i
+                                class="mdi mdi-account-network"></i><span class="hide-menu">Laporan</span></a>
+                    </li>
+                    
+                    @else
+                        
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/dashboardsuperadmin" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                    class="hide-menu">Dashboard</span></a>
+                        </li>
                         <li class="sidebar-item dropdown">
                             <a class="nav-link collapsed sidebar-link waves-effect waves-dark sidebar-link" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" role="button" data-toggle="collapse" data-target="#submenu1">
                                 <i class="mdi mdi-border-all"></i>
@@ -116,14 +125,14 @@
                             </a>
                           
                             <ul class="dropdown-menu collapse border-0" style="background-color: white; color: black;" id="submenu1" aria-labelledby="navbarDropdownMenuLink">
-                              <li><a class="dropdown-item" href="/kepala_sekolah">Kepala sekolah</a></li>
-                              <li><a class="dropdown-item" href="/puskesmas">Puskesmas</a></li>
-                              <li><a class="dropdown-item" href="/wali_kelas">wali kelas</a></li>
+                              <li><a class="dropdown-item" href="/akunpetugas">Petugas</a></li>
+                              
                         
-                              <li><a class="dropdown-item" href="/siswa">siswa</a></li>
+                              <li><a class="dropdown-item" href="/akunuser">User</a></li>
                             </ul>
             
                 </li>
+                @endcan
    
              
                     </ul>
@@ -151,7 +160,7 @@
             </div>
            
             <footer class="footer text-center">
-                created by dumas
+                created by Musvil 1.1.0
             </footer>
             
         </div>
@@ -175,6 +184,21 @@
             
         @endforeach
         
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script type="text/javascript">
+       $(document).ready(function (e) {
+          $("#image").change(function () {
+             let reader = new FileReader();
+
+             reader.onload = (e) => {
+                $("#preview-image-before-upload").attr("src", e.target.result);
+             };
+
+             reader.readAsDataURL(this.files[0]);
+          });
+       });
     </script>
 </body>
 

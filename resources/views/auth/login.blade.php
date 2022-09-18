@@ -16,7 +16,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                        <input type="text" name="email" id="your_name" placeholder="Your Email"/>
+                        <input type="text" name="email" id="your_name" placeholder="Your Email"  value="{{ old('email') }}" />
                     </div>
                     <div class="form-group">
                         <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>

@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>Musvil</title>
 </head>
 <body>
@@ -35,15 +36,18 @@
                 <p>Kami memberikan pilihan <br> villa yang paling diminati</p>
             </div>
             <div class="row produk-list">
+                @foreach ($datas as $data )
+                    
+               
                 <div data-aos="fade-up" class="col-12 col-md-6 col-lg-3 aos-init">
                     <a href="">
                         <div class="card">
                             <div class="image">
-                                <img src="img/produk/villa1.jpg" alt="Gatot Kaca">
+                                <img src="/assets/images/villa/{{ $data->image }}" alt="Gatot Kaca">
                             </div>
                             <div class="info">
-                                <h3>Villa Gadi</h3>
-                                <p>IDR 200,000/malam</p>
+                                <h3>{{ $data->name }}</h3>
+                                <p>IDR {{ $data->harga }}/malam</p>
                             </div>
                             <div class="hover d-flex justify-content-center align-items-center">
                                 <div class="find">
@@ -53,63 +57,11 @@
                         </div>
                     </a>
                 </div>
-                <div data-aos="fade-up" class="col-12 col-md-6 col-lg-3 aos-init">
-                    <a href="#">
-                        <div class="card">
-                            <div class="image">
-                                <img src="img/produk/villa1.jpg" alt="Hanoman">
-                            </div>
-                            <div class="info">
-                                <h3>Villa Dadi</h3>
-                                <p>IDR 150,000/malam</p>
-                            </div>
-                            <div class="hover d-flex justify-content-center align-items-center">
-                                <div class="find">
-                                    <img src="img/icon/find.png" alt="search">
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div data-aos="fade-up" class="col-12 col-md-6 col-lg-3 aos-init">
-                    <a href="">
-                        <div class="card">
-                            <div class="image">
-                                <img src="img/produk/villa1.jpg" alt="Kumbakarna">
-                            </div>
-                            <div class="info">
-                                <h3>Villa kudi</h3>
-                                <p>IDR 180,000/malam</p>
-                            </div>
-                            <div class="hover d-flex justify-content-center align-items-center">
-                                <div class="find">
-                                    <img src="img/icon/find.png" alt="search">
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div data-aos="fade-up" class="col-12 col-md-6 col-lg-3 aos-init">
-                    <a href="">
-                        <div class="card">
-                            <div class="image">
-                                <img src="img/produk/villa1.jpg" alt="Subali">
-                            </div>
-                            <div class="info">
-                                <h3>Villa Subali</h3>
-                                <p>IDR 140,000/malam</p>
-                            </div>
-                            <div class="hover d-flex justify-content-center align-items-center">
-                                <div class="find">
-                                    <img src="img/icon/find.png" alt="search">
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                @endforeach
+             
             </div>
             <div data-aos="fade-up" class="text-center aos-init">
-                <a href="" class="btn btn-outline-dark">Selengkapnya</a>
+                <a href="/selengkap" class="btn btn-outline-dark">Selengkapnya</a>
             </div>
         </div>
     </section>

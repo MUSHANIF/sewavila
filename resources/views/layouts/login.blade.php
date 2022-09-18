@@ -8,6 +8,7 @@
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <script src="https://cdn.statically.io/gh/devanka761/notipin/v1.24.49/all.js"></script>
 
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
@@ -23,6 +24,19 @@
     </div>
 
     <!-- JS -->
+      <script>
+        @foreach($errors->all() as $error)
+        Notipin.Alert({
+            msg: "{{ $error }}", 
+            yes: "OKE",
+            
+            type: "NORMAL",
+            mode: "DARK",
+            })
+            
+        @endforeach
+        
+    </script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->

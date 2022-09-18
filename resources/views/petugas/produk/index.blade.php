@@ -1,16 +1,13 @@
 @extends('layouts.admin')
 @section('search')
-<form action="{{ url('superadmin/daftar-admin/') }}" method="GET" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-    @csrf
-<div class="input-group">
-    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-        aria-label="Search" aria-describedby="basic-addon2" name="cari" value="{{ request('cari') }}">
-    <div class="input-group-append">
-        <button class="btn" style="background-color: #256D85;" type="submit">
-            <i class="fas fa-search fa-sm text-white"></i>
-        </button>
-    </div>
-</div>
+
+<li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
+    href="javascript:void(0)"><i class="mdi mdi-magnify me-1"></i> <span class="font-16">Search</span></a>
+<form action="{{ url('produk') }}" method="GET" class="app-search position-absolute">
+    <input type="text" class="form-control" name="cari" placeholder="Search &amp; enter"> <a
+        class="srh-btn"><i class="mdi mdi-window-close"></i></a>
+</form>
+</li>
 </form>
 @endsection
 @section("button")
@@ -30,7 +27,7 @@
    
     <table class="table mt-3" cellpadding="10" cellspace="0">
         <thead class="align-self-center text-center">
-            
+            <th>Foto</th>
             <th>jenis villa</th>
             <th>Nama</th>
             <th>harga</th>
@@ -43,7 +40,8 @@
         @foreach ($datas as $key) 
         <tbody>
             <tr class="align-self-center text-center"  style="border: 1px solid black;">
-            
+                <td class="text-light" data-label="Images"><img src="/assets/images/villa/{{ $key->image }}" style="height: 100px; width: 150px" /></td>
+
                 <td data-label="">{{ $key->jns->jenis }}</td>
                 <td data-label="Name">{{ $key->name }}</td>
                 <td data-label="Cost">{{ $key->harga }}</td>

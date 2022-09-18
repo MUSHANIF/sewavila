@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class transaksi extends Model
 {
     use HasFactory;
+     public function trans()
+    {
+        return $this->belongsTo(villa::class, 'villaID', 'id');
+    }
+
 }

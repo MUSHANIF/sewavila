@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\villa;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,10 +12,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+  
 
     /**
      * Show the application dashboard.
@@ -23,6 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+       $datas =  DB::table('villas')->paginate(4);
+        return view('welcome', compact('datas'));
     }
+     
 }

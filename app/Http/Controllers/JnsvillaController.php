@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\jnsvilla;
 use App\Http\Requests\StorejnsvillaRequest;
 use App\Http\Requests\UpdatejnsvillaRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class JnsvillaController extends Controller
 {
@@ -13,9 +16,13 @@ class JnsvillaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $cari = $request->cari;
+        $datas =  jnsvilla::with([
+            'villa'
+        ])->where('jenis','like',"%".$cari."%")->get();
+        return view('petugas.jnsvilla.index', compact('datas'));
     }
 
     /**
@@ -25,7 +32,8 @@ class JnsvillaController extends Controller
      */
     public function create()
     {
-        //
+        $datas =  DB::table('jnsvillas')->get();
+        return view('petugas.jnsvilla.create', compact('datas'));
     }
 
     /**
@@ -34,9 +42,23 @@ class JnsvillaController extends Controller
      * @param  \App\Http\Requests\StorejnsvillaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorejnsvillaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $model = new jnsvilla;
+      
+        $model->jenis = $request->jenis;
+        $validasi = Validator::make($data, [
+            'jenis' => 'required|max:191|unique:jnsvillas',
+        ]);
+        if ($validasi->fails()) {
+            return redirect()->route('jnsvilla.create')->withInput()->withErrors($validasi);
+        }
+       
+        $model->save();
+
+        toastr()->success('Berhasil di buat!', 'Sukses');
+        return redirect('/jns');
     }
 
     /**
@@ -56,9 +78,10 @@ class JnsvillaController extends Controller
      * @param  \App\Models\jnsvilla  $jnsvilla
      * @return \Illuminate\Http\Response
      */
-    public function edit(jnsvilla $jnsvilla)
+    public function edit($id)
     {
-        //
+        $datas = jnsvilla::find($id);
+        return view('petugas.jnsvilla.ubah',compact('datas'));
     }
 
     /**
@@ -79,8 +102,11 @@ class JnsvillaController extends Controller
      * @param  \App\Models\jnsvilla  $jnsvilla
      * @return \Illuminate\Http\Response
      */
-    public function destroy(jnsvilla $jnsvilla)
+    public function destroy($id)
     {
-        //
+        $hapus = jnsvilla::find($id);
+        $hapus->delete();
+        toastr()->info('Berhasil di hapus!', 'Sukses');
+        return redirect('jns');
     }
 }

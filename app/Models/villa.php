@@ -12,5 +12,8 @@ class villa extends Model
     {
         return $this->belongsTo(jnsvilla::class, 'jnsID', 'id');
     }
-
+     public function transaksi()
+    {
+        return $this->hasMany(transaksi::class, 'villaID', 'id');
+    }
 }
