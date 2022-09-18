@@ -18,8 +18,8 @@ class detailController extends Controller
         $datas =  jnsvilla::with([
             'villa'])
         ->join('villas', 'villas.jnsID', '=', 'jnsvillas.id')
-        ->where('villas.name','like',"%".$cari."%")
         ->where('jnsvillas.jenis','like',"%".$cari."%")
+        ->Orwhere('villas.name','like',"%".$cari."%")    
         ->get();
         return view('selengkap', compact('datas'));
     }

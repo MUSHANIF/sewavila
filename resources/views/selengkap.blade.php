@@ -40,14 +40,16 @@
 </nav>
    <div class="container">
         <div class="row mt-5">
+         <form action="{{ url('selengkap') }}" method="GET">
           <div class="col-md-12">
             <div class="input-group mb-3">
-              <form action="{{ url('selengkap') }}" method="GET">
+             
                 <input type="text" class="form-control" name="cari" value="{{ request('cari') }}" placeholder="Cari villa disini! atau cari jenis nya!" aria-label="Recipient's username" aria-describedby="button-addon2">
                 <button class="btn btn-primary" type="submit" id="button-addon2">Button</button>
-            </form>
+           
           </div>
           </div>
+           </form>
         </div>
      <div class="row"> 
       @foreach($datas as $key)
