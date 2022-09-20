@@ -7,6 +7,7 @@ use App\Http\Controllers\produkController;
 use App\Http\Controllers\jnsvillaController;
 use App\Http\Controllers\detailController;
 use App\Http\Controllers\petugassuperadminController;
+use App\Http\Controllers\laporanController;
 use App\Http\Controllers\usersuperadminController;
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::get('/selengkap', [App\Http\Controllers\detailController::class, 'selengk
 
 Route::group(['middleware' => ['petugas']], function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);
+    Route::get('/laporan', [laporanController::class, 'index']);
+    Route::get('/laporanexcel', [laporanController::class, 'excel']);
     Route::resource('produk', produkController::class);
     Route::resource('jns', jnsvillaController::class);
 });

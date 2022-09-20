@@ -12,5 +12,8 @@ class transaksi extends Model
     {
         return $this->belongsTo(villa::class, 'villaID', 'id');
     }
-
+    public function pembeli()
+    {
+        return $this->belongsTo(pembeli::class, 'pembeliID', 'id');
+    }
 }

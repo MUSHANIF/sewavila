@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class pembeli extends Model
 {
     use HasFactory;
+    public function beli()
+    {
+        return $this->hasMany(transaksi::class, 'pembeliID', 'id');
+    }
 }
