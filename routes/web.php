@@ -30,6 +30,7 @@ Route::group(['middleware' => ['petugas']], function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);
     Route::get('/laporan', [laporanController::class, 'index']);
     Route::get('/laporanexcel', [laporanController::class, 'excel']);
+    Route::get('/laporanpdf', [laporanController::class, 'pdf']);
     Route::resource('produk', produkController::class);
     Route::resource('jns', jnsvillaController::class);
 });

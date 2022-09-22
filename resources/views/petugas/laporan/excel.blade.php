@@ -10,8 +10,8 @@
 
         
         <th>nama</th>
-        <th>hari</th>
         <th>alamat</th>
+        <th>Hari</th>
     </tr>
         
     </thead>

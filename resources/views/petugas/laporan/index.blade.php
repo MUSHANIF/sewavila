@@ -2,8 +2,12 @@
 @section("button")
 <div class="col-6">
     <div class="text-end upgrade-btn">
-        <a href="/laporanexcel" class="btn btn-primary text-white"
+        <a href="/laporanexcel" class="btn btn-success text-white"
                 >Download EXCEL</a>
+    </div>
+    <div class="text-end upgrade-btn mt-3">
+        <a href="/laporanpdf" class="btn btn-danger text-white"
+                >Download PDF</a>
     </div>
 </div>
 @endsection
@@ -11,11 +15,11 @@
 <div class="container">
     @if ($datas->isNotEmpty())
    
-    <table class="table mt-3" cellpadding="10" cellspace="0">
+    <table class="table mt-1" cellpadding="10" cellspace="0">
         <thead class="align-self-center text-center">
             <th>nama</th>
-            <th>hari</th>
             <th>alamat</th>
+            <th>Hari pembayaran</th>
             <th>action</th>
             
         </thead>
