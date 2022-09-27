@@ -40,7 +40,7 @@
                     
                
                 <div data-aos="fade-up" class="col-12 col-md-6 col-lg-3 aos-init">
-                    <a href="">
+                    <a href="{{ url('detail/'.$data->id) }}">
                         <div class="card">
                             <div class="image">
                                 <img src="/assets/images/villa/{{ $data->image }}" alt="Gatot Kaca">

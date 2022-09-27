@@ -112,7 +112,9 @@
                                 class="mdi mdi-account-network"></i><span class="hide-menu">Laporan</span></a>
                     </li>
                     
-                    @else
+                    @elsecan('superadmin')
+                        
+                
                         
                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/dashboardsuperadmin" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
@@ -132,6 +134,16 @@
                             </ul>
             
                 </li>
+                @else
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                    href="/selengkap" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                        class="hide-menu">Kembali ke pencarian</span></a>
+            </li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                    href="/keranjang" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                        class="hide-menu">Keranjang</span></a>
+            </li>
+   
                 @endcan
    
              

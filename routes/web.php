@@ -25,6 +25,9 @@ use App\Http\Controllers\usersuperadminController;
 // });
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('/selengkap', [App\Http\Controllers\detailController::class, 'selengkap'])->name('selengkap');
+Route::get('/detail/{id}', [App\Http\Controllers\detailController::class, 'detail'])->name('detail');
+Route::post('/tambah/{id}', [App\Http\Controllers\detailController::class, 'tambah'])->name('tambah');
+Route::get('/keranjang/{id}', [App\Http\Controllers\detailController::class, 'keranjang'])->name('keranjang');
 
 Route::group(['middleware' => ['petugas']], function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);
