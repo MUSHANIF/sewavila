@@ -31,9 +31,10 @@
                 <td class="text-center justify-content-center align-self-center d-flex">
                     
                    
-                    <form action="{{ url('akunpetugas/'.$key->id) }}" method="POST" >
+                    <form action="{{ url('hapus/'.$key->id) }}" method="POST" >
                         @csrf
-                        <input type="hidden" name="_method" value="DELETE">
+                        @method('delete')
+                        <input type="hidden" name="hapus" value="{{ $key->vila->id }}">
                         <button type="submit" class="btn btn-danger ms-2">Delete pesanan</button>
                     </form>
                 </td>

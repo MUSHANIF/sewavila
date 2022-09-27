@@ -7,6 +7,7 @@ use App\Models\cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Auth;
 use Validator;
 
 class detailController extends Controller
@@ -32,7 +33,8 @@ class detailController extends Controller
         return view('detail',compact('datas'));
     }
     public function keranjang(Request $request,$id){
-       $datas = cart::where('userid', $id)->get();
+       $datas = cart::with([
+        'vila'])->where('userid','=', $id)->get();
        $total = cart::where('userid', $id)->sum('jumlah');
        $stok = cart::where('userid', $id)->sum('stok');
        return view('keranjang',compact('datas','total','stok'));
@@ -54,15 +56,33 @@ class detailController extends Controller
     $data = $request->all();
    
     $model = new cart;
+    $model->villaid = $request->villa;
     $model->userid = $request->id;
     $model->name = $request->name;
-
+    $model->jenis = $request->jenis;
     $model->stok = $request->jumlah;
 
     $model->jumlah =  $coba->harga*$request->jumlah;
     $model->tanggal = date("Y-m-d");
     $model->save();
-    toastr()->success('Berhasil di buat!', 'Sukses');
-       return redirect('/keranjang');
+    toastr()->success('Berhasil di tambah ke keranjang anda!', 'Sukses');
+    return redirect()->route('keranjang', Auth::user()->id);
+    }
+    public function deletecart(Request $request,$id){
+        $datas =  DB::table('carts')
+        ->where('id', $id)
+        ->first();
+        $hapus = $request->hapus ;
+        $prod = villa::where('id', '=', $hapus  )->first();
+        villa::where('id', '=', $hapus  )->update([
+            'stok' => $prod->stok + $datas->stok,
+          
+        ]);
+        DB::table('carts')
+        ->where('id', $id)
+      
+        ->delete();
+     
+        return redirect()->route('keranjang', Auth::user()->id);
     }
 }

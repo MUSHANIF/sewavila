@@ -16,4 +16,8 @@ class villa extends Model
     {
         return $this->hasMany(transaksi::class, 'villaID', 'id');
     }
+    public function villa()
+    {
+        return $this->hasMany(cart::class, 'villaid', 'id');
+    }
 }

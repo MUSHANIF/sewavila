@@ -62,9 +62,11 @@ $tanggal = date("Y-m-d");
         <div class="col-lg-6 p-5  mt-3">
             <form action="{{ url('/tambah',$key->id) }}" method="post" enctype="multipart/form-data" >
                 @csrf
+              <input type="hidden" name="villa" value="{{ $key->id}}">
               <input type="hidden" name="name" value="{{ $key->name}}">
               <input type="hidden" name="harga" value="{{ $key->harga}}">
               <input type="hidden" name="stok" value="{{ $key->stok}}">
+              <input type="hidden" name="jenis" value="{{ $key->jns->jenis}}">
                 <div class="form-group">
                     <label for="formGroupExampleInput">Name</label>
                     <input class="form-control mt-3" type="text"  value="{{ $key->name }}" aria-label="Disabled input example" disabled readonly>

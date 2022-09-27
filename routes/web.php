@@ -28,6 +28,7 @@ Route::get('/selengkap', [App\Http\Controllers\detailController::class, 'selengk
 Route::get('/detail/{id}', [App\Http\Controllers\detailController::class, 'detail'])->name('detail');
 Route::post('/tambah/{id}', [App\Http\Controllers\detailController::class, 'tambah'])->name('tambah');
 Route::get('/keranjang/{id}', [App\Http\Controllers\detailController::class, 'keranjang'])->name('keranjang');
+Route::delete('/hapus/{id}', [App\Http\Controllers\detailController::class, 'deletecart'])->name('deletecart');
 
 Route::group(['middleware' => ['petugas']], function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);
