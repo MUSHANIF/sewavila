@@ -36,10 +36,10 @@ class detailController extends Controller
     }
     public function keranjang(Request $request,$id){
        $datas = cart::with([
-        'vila'])->where('userid','=', $id)->get();
+        'vila'])->where('userid','=', $id)->where('status',0)    ->get();
         $data = cart::where('userid','=', $id)->first();
-       $total = cart::where('userid', $id)->sum('jumlah');
-       $stok = cart::where('userid', $id)->sum('stok');
+       $total = cart::where('userid', $id)->where('status',0)->sum('jumlah');
+       $stok = cart::where('userid', $id)->where('status',0)->sum('stok');
        $status = $data->status === 0;
        return view('keranjang',compact('datas','total','stok','status'));
     }
@@ -91,7 +91,7 @@ class detailController extends Controller
     }   
     public function pembayaran($id){
         $datas =  DB::table('carts')
-        ->where('userid', $id)
+        ->where('userid', $id)->where('status',0)
         ->get();
         $total = $datas->sum('stok');
         $jumlah = $datas->sum('jumlah');

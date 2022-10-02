@@ -5,7 +5,7 @@
 <h1 class="mb-0 fw-bold">List Keranjang</h1> 
 @endsection
 @section("button")
-@if ($status)
+@if ($datas->isNotEmpty())
 <div class="col-6">
     <div class="text-end upgrade-btn">
        
@@ -19,7 +19,7 @@
 @endsection
 @section('isi')
 <div class="container">
-    @if ($status)
+    @if ($datas->isNotEmpty())
    
     <table class="table mt-3" cellpadding="10" cellspace="0">
         <thead class="align-self-center text-center">
@@ -61,7 +61,7 @@
 
     </table>
 
-    @elseif (!$status)
+    @else
     <div id="error">
         <div class="container text-center">
         <div class="pt-8">
@@ -71,7 +71,7 @@
           </div>
         </div>
     </div>
-    @else
+
           @endif
 </div>
     
