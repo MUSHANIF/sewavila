@@ -29,6 +29,9 @@ Route::get('/detail/{id}', [App\Http\Controllers\detailController::class, 'detai
 Route::post('/tambah/{id}', [App\Http\Controllers\detailController::class, 'tambah'])->name('tambah');
 Route::get('/keranjang/{id}', [App\Http\Controllers\detailController::class, 'keranjang'])->name('keranjang');
 Route::delete('/hapus/{id}', [App\Http\Controllers\detailController::class, 'deletecart'])->name('deletecart');
+Route::delete('/pesan/{id}', [App\Http\Controllers\detailController::class, 'pesan'])->name('pesan');
+Route::get('/pembayaran/{id}', [App\Http\Controllers\detailController::class, 'pembayaran'])->name('pembayaran');
+Route::post('/bayar/{id}', [App\Http\Controllers\detailController::class, 'bayar'])->name('bayar');
 
 Route::group(['middleware' => ['petugas']], function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);

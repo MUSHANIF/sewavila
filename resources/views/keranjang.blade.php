@@ -4,9 +4,22 @@
 @section('title')
 <h1 class="mb-0 fw-bold">List Keranjang</h1> 
 @endsection
+@section("button")
+@if ($status)
+<div class="col-6">
+    <div class="text-end upgrade-btn">
+       
+        <a href="{{ url('pembayaran/'.Auth::user()->id) }}" class="btn btn-primary text-white"
+            
+        
+                >Pesan</a>
+    </div>
+</div>
+@endif
+@endsection
 @section('isi')
 <div class="container">
-    @if ($datas->isNotEmpty())
+    @if ($status)
    
     <table class="table mt-3" cellpadding="10" cellspace="0">
         <thead class="align-self-center text-center">
@@ -48,16 +61,17 @@
 
     </table>
 
-    @else
+    @elseif (!$status)
     <div id="error">
         <div class="container text-center">
         <div class="pt-8">
             <h1 class="errors-titles">404</h1>
-            <p>Data Kosong,tidak ada villa!</p>
+            <p>keranjang anda kosong!</p>
            
           </div>
         </div>
     </div>
+    @else
           @endif
 </div>
     

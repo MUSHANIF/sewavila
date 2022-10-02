@@ -140,7 +140,7 @@
                         class="hide-menu">Kembali ke pencarian</span></a>
             </li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="/keranjang" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                    href="/keranjang/{{ Auth::user()->id }}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                         class="hide-menu">Keranjang</span></a>
             </li>
    
