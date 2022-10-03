@@ -15,12 +15,15 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();     
-            $table->unsignedBigInteger('villaID');
-            $table->unsignedBigInteger('pembeliID');
-            $table->string('hari');
+            $table->unsignedBigInteger('villaid');
+            $table->unsignedBigInteger('userid');
+            $table->string('metode_pembayaran',20);
+            $table->integer('total',40);
+            $table->integer('kembalian',40);
+            $table->string('hari',255);
             $table->timestamps();
-            $table->foreign('villaID')->references('id')->on('villas')->onDelete('cascade');
-            $table->foreign('pembeliID')->references('id')->on('pembelis')->onDelete('cascade');
+            $table->foreign('villaid')->references('id')->on('villas')->onDelete('cascade');
+            $table->foreign('userid')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

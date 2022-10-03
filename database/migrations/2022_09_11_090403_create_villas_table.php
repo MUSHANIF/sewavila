@@ -17,7 +17,6 @@ class CreateVillasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('jnsID');
             $table->string('name');
-            $table->string('image');
             $table->string('harga');
             $table->string('stok');
             $table->string('image');
