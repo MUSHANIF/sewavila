@@ -100,10 +100,11 @@ class detailController extends Controller
     public function bayar(Request $request,$id){
         $data =  DB::table('carts')
         ->where('userid', $id)
+        ->where('tanggal','=', date("Y-m-d"))
         ->get();
         $jumlah = $data->sum('jumlah');
         $datas = cart::with([
-            'vila'])->where('userid','=', $id)->get();
+            'vila'])->where('userid','=', $id)->where('status','=', '0')->get();
         $datas1 = transaksi::where('userid','=', $id)->first();
        
         
@@ -124,10 +125,14 @@ class detailController extends Controller
                 $total = $data->sum('stok');
                 $cart = cart::where('userid',$id)->update(['status' => 1]);
                 $pdf = PDF::loadview('bukti', compact('datas','metode','kembalian','bayar','total','jumlah','hari'));
-                return $pdf->download('bukti.pdf');
-                return redirect()->route('keranjang' , $id)->with('success','berhasil');
+                return $pdf->download('bukti '.date("Y-m-d").'.pdf');//bug
+               
+                if(count($pdf->download('bukti.pdf')) == 1 ){
+                    return redirect()->route('keranjang' , $id)->with('success','berhasil');
+                 }
                 
          }
+        
         
             return redirect()->route('pembayaran' , $id)->with('error','kurang dana ya? haha');
          

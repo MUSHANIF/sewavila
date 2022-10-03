@@ -8,10 +8,11 @@
         </tr>
         <tr>
 
-        
-        <th>nama</th>
-        <th>alamat</th>
-        <th>Hari</th>
+            <th>nama</th>
+            <th>Metode pembayaran</th>
+            <th>tanggal pembayaran</th>
+            <th>total yang di bayar kan</th>
+            <th>kembalian</th>
     </tr>
         
     </thead>
@@ -19,10 +20,11 @@
     @foreach ($datas as $key) 
     <tbody>
         <tr class="align-self-center text-center"  style="border: 1px solid black;">
-            
             <td data-label="Cost">{{ $key->pembeli->name }}</td>
-            <td data-label="Cost">{{ $key->pembeli->alamat }}</td>
+            <td data-label="Cost">{{ $key->metode_pembayaran }}</td>
             <td data-label="Cost">{{ $key->hari }}</td>
+            <td data-label="Cost">{{ $key->total }}</td>
+            <td data-label="Cost">{{ $key->kembalian }}</td>
  
             
         

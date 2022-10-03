@@ -14,6 +14,6 @@ class transaksi extends Model
     }
     public function pembeli()
     {
-        return $this->belongsTo(pembeli::class, 'pembeliID', 'id');
+        return $this->belongsTo(User::class, 'userid', 'id');
     }
 }
