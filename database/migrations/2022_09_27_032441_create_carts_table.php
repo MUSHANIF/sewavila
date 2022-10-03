@@ -22,6 +22,7 @@ class CreateCartsTable extends Migration
             $table->integer('stok');
             $table->string('jenis',50); 
             $table->timestamp('tanggal');
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('villaid')->references('id')->on('villas')->onDelete('cascade');
