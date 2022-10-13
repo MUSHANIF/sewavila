@@ -8,6 +8,7 @@ use App\Http\Controllers\jnsvillaController;
 use App\Http\Controllers\detailController;
 use App\Http\Controllers\petugassuperadminController;
 use App\Http\Controllers\laporanController;
+use App\Http\Controllers\diskonController;
 use App\Http\Controllers\usersuperadminController;
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,9 @@ Route::post('/tambah/{id}', [App\Http\Controllers\detailController::class, 'tamb
 Route::get('/keranjang/{id}', [App\Http\Controllers\detailController::class, 'keranjang'])->name('keranjang');
 Route::delete('/hapus/{id}', [App\Http\Controllers\detailController::class, 'deletecart'])->name('deletecart');
 Route::delete('/pesan/{id}', [App\Http\Controllers\detailController::class, 'pesan'])->name('pesan');
-Route::get('/pembayaran/{id}', [App\Http\Controllers\detailController::class, 'pembayaran'])->name('pembayaran');
+Route::post('/pembayaran/{id}', [App\Http\Controllers\detailController::class, 'pembayaran'])->name('pembayaran');
 Route::post('/bayar/{id}', [App\Http\Controllers\detailController::class, 'bayar'])->name('bayar');
+Route::post('/redem/{id}', [App\Http\Controllers\detailController::class, 'redem'])->name('redem');
 
 Route::group(['middleware' => ['petugas']], function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);
@@ -39,6 +41,7 @@ Route::group(['middleware' => ['petugas']], function () {
     Route::get('/laporanexcel', [laporanController::class, 'excel']);
     Route::get('/laporanpdf', [laporanController::class, 'pdf']);
     Route::resource('produk', produkController::class);
+    Route::resource('diskon', diskonController::class);
     Route::resource('jns', jnsvillaController::class);
 });
 Route::group(['middleware' => ['superadmin']], function () {

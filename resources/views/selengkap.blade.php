@@ -63,12 +63,12 @@
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Stok : {{ $key->stok }}</li>
-                    <li class="list-group-item">Harga : Rp.{{ $key->harga }}/Malam</li>
+                    <li class="list-group-item">Harga : Rp.{{ number_format($key->harga, 0, '', '.') }}/Malam</li>
                     <li class="list-group-item">Jenis : {{ $key->jenis }}</li>
                   </ul>
                   <div class="card-body">
-                    <a href="#" class="card-link">Tambahkan ke keranjang</a>
-                    <a href="{{ url('detail/'.$key->id) }}" class="card-link">Detail</a>
+                    
+                    <a href="{{ url('detail/'.$key->id) }}" class="card-link">Tambahkan ke keranjang</a>
                   </div>
                 </div>
      

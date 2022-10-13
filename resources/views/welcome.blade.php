@@ -47,7 +47,7 @@
                             </div>
                             <div class="info">
                                 <h3>{{ $data->name }}</h3>
-                                <p>IDR {{ $data->harga }}/malam</p>
+                                <p>IDR {{ number_format($data->harga, 0, '', '.') }}/malam</p>
                             </div>
                             <div class="hover d-flex justify-content-center align-items-center">
                                 <div class="find">

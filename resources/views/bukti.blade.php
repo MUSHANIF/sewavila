@@ -35,9 +35,11 @@
 									<ul class="list-group">
 										<li class="list-group-item ">Total villa yang anda pesan: {{ $total }}</li>
 										<li class="list-group-item">Total harga seluruh villa yang anda pesan: {{ $jumlah }}</li>
+										<li class="list-group-item ">Total diskon yang anda peroleh: {{ $diskonss }}</li>
                                         <li class="list-group-item">Metode pembayaran : {{ $metode }}</li>
                                         <li class="list-group-item">Total bayar :  {{ $bayar }}</li>
-                                        <li class="list-group-item">Kembalian :  {{ $kembalian }}</li>
+                                        <li class="list-group-item">Kembalian :  {{ preg_replace("/-/","", $kembalian);
+										}}</li>
 									</ul>
 									
 								

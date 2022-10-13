@@ -107,6 +107,10 @@
                             href="/jns" aria-expanded="false"><i
                                 class="mdi mdi-account-network"></i><span class="hide-menu">Jenis Villa</span></a>
                     </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="/diskon" aria-expanded="false"><i
+                            class="mdi mdi-account-network"></i><span class="hide-menu">Diskon</span></a>
+                </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                             href="/laporan" aria-expanded="false"><i
                                 class="mdi mdi-account-network"></i><span class="hide-menu">Laporan</span></a>
