@@ -22,7 +22,9 @@ class HomeController extends Controller
     public function index()
     {
        $datas =  DB::table('villas')->paginate(4);
-        return view('welcome', compact('datas'));
+       $udin =  DB::table('villas')->paginate(3);
+       $home  = DB::table('villas')->where('jnsID',1)->Orwhere('id',5)->paginate(2);
+        return view('welcome', compact('datas','udin','home'));
     }
      
 }

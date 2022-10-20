@@ -32,7 +32,7 @@
           
         </div>
         <div class="modal-footer">
-        <a href="{{ url('pembayaran/'.Auth::user()->id) }}" class="btn btn-primary text-white"
+        <a href="{{ url('redem/'.Auth::user()->id) }}" class="btn btn-primary text-white"
                 >Lanjutkan transaksi   </a>
           <button type="submit" class="btn btn-primary">kirim kode redeem</button>
           </form>

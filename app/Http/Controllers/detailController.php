@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use PDF;
 use Validator;
-
+use Alert;
 class detailController extends Controller
 {
       public function __construct()
@@ -41,8 +41,11 @@ class detailController extends Controller
         $data = cart::where('userid','=', $id)->first();
        $total = cart::where('userid', $id)->where('status',0)->where('tanggal','=', date("Y-m-d"))->sum('jumlah');
        $stok = cart::where('userid', $id)->where('status',0)->where('tanggal','=', date("Y-m-d"))->sum('stok');
-       $status = $data->status === 0;
-       return view('keranjang',compact('datas','total','stok','status'));
+    //    $status = $data->status === 0;
+    // example:
+    alert()->success('Info','List keranjang anda akan terhapus dalam 24 jam!')->showConfirmButton('Confirm', '#3085d6');
+
+       return view('keranjang',compact('datas','total','stok'));
     }
     public function tambah(Request $request , $id)
     {
@@ -88,30 +91,35 @@ class detailController extends Controller
         ->get();
         $diskon =  diskon::where('kode', $request->redem)->first();
   
-        if(  $request->redem === $diskon->kode ){
-          
+        if($request->redem === $diskon->kode ){
+            $cart = cart::where('userid',$id)->where('tanggal','=', date("Y-m-d"))->update(['diskon' => $diskon->diskon]);
             $total = $datas->sum('stok');
             $jumlah = $datas->sum('jumlah') - $diskon->diskon;
             $diskons = $datas->sum('diskon');
-            $totals = $datas->count();
-            $cart = cart::where('userid',$id)->where('tanggal','=', date("Y-m-d"))->update(['diskon' => $diskon->diskon]);
-            return view('pembayaran',compact('datas','total','jumlah','diskons','totals'));
-        }elseif($request->redem != $diskon->kode){
-            
+            $totals = $datas->count();       
+            toastr()->success('diskon Berhasil di pakai!', 'Sukses');
+            return view('pembayaran',compact('datas','total','jumlah','diskons','totals','diskon'));                       
+        }else{
             $total = $datas->sum('stok');
             $jumlah = $datas->sum('jumlah');
             $diskons = $datas->sum('diskon');
             $totals = $datas->count();
             toastr()->error('diskon kadaluarsa', 'Gagal');
             return view('pembayaran',compact('datas','total','jumlah','diskons','totals'));
-        }else{
-            $total = $datas->sum('stok');
-            $jumlah = $datas->sum('jumlah');
-            $diskons = $datas->sum('diskon');
-            $totals = $datas->count();
-            return view('pembayaran',compact('datas','total','jumlah','diskons','totals'));
         }
     }
+     public function redem(Request $request,$id){
+        $diskon =  diskon::where('kode', $request->redem)->first();
+        $datas =  DB::table('carts')
+        ->where('userid', $id)->where('status',0)
+        ->where('tanggal','=', date("Y-m-d"))
+        ->get();
+        $total = $datas->sum('stok');
+        $jumlah = $datas->sum('jumlah');
+        $diskons = $datas->sum('diskon');
+        $totals = $datas->count();
+        return view('pembayaran',compact('datas','total','jumlah','diskons','totals','diskon'));
+     }
     public function bayar(Request $request,$id){
         $data =  DB::table('carts')
         ->where('userid', $id)
@@ -127,28 +135,32 @@ class detailController extends Controller
         if(  $request->total >= $jumlah  ){
         
                 $model = new transaksi;
-                $tots = $request->total - $diskon1;
+                $tots = $data->sum('jumlah') - $diskon1;
                 $model->villaid = $request->villaid;
                 $model->userid = $request->userid;
                 $model->metode_pembayaran = $request->metode_pembayaran;
+                $model->bayar = $request->total;
                 $model->total = $tots;
-                $model->kembalian = $jumlah - $tots;
+                $model->kembalian = $model->bayar  -   $model->total;
                 $model->hari = date("Y-m-d");
                 $model->save();
                 $datas1 = transaksi::where('userid','=', $id)->where('hari','=', date("Y-m-d"))->first();
                 $metode = $datas1->metode_pembayaran;
-                $kembalian = $datas1->kembalian;
+                $kembali = $datas1->kembalian;
+                $duit = $datas1->bayar;
                 $bayar = $datas1->total;
                 $hari = $datas1->hari;
                 $total = $data->sum('stok');
                 $diskonss = $data->sum('diskon');
                 $cart = cart::where('userid',$id)->where('tanggal','=', date("Y-m-d"))->update(['status' => 1]);
-                $pdf = PDF::loadview('bukti', compact('datas','metode','kembalian','bayar','total','jumlah','hari','diskonss'));
+                $pdf = PDF::loadview('bukti', compact('datas','metode','kembali','bayar','total','jumlah','hari','diskonss','tots','duit'));
                 return $pdf->download('bukti '.date("Y-m-d").'.pdf');//bug
-               
-                if(count($pdf->download('bukti.pdf')) == 1 ){
+                if( $request->download){
                     return redirect()->route('keranjang' , $id)->with('success','berhasil');
-                 }
+                }
+            
+                
+                 
                 
          }else{
             $datas =  DB::table('carts')
@@ -161,7 +173,7 @@ class detailController extends Controller
             $diskons = $datas->sum('diskon');
             $totals = $datas->count();
             toastr()->error('uang anda kurang!', 'Gagal');
-            return view('pembayaran',compact('datas','total','jumlah','diskons','totals'));
+            return view('pembayaran',compact('datas','total','jumlah','diskons','totals','diskon'));
          }
         
         

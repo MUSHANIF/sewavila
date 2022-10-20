@@ -25,12 +25,17 @@
 										
 										
 										<input type="hidden" name="userid" value="{{ $key->userid }}">
+										<input type="hidden" name="download" value="1">
 										<input type="hidden" name="villaid" value="{{ $key->villaid }}">
 										@endforeach
 									<ul class="list-group">
 										<li class="list-group-item ">Total villa yang anda pesan: {{ $total }}</li>
 										<li class="list-group-item">Total harga seluruh villa yang anda pesan: {{ number_format($jumlah, 0, '', '.') }}</li>
+										@if ($diskon)
+											
+										
 										<li class="list-group-item">Total diskon yang anda peroleh: {{ number_format($diskons, 0, '', '.') }} untuk {{ $totals }} jenis villa</li>
+										@endif
 										<li class="list-group-item "> metode pembayaran yang tersedia: 
 											<select class="form-select mt-2" aria-label="Default select example" name="metode_pembayaran" required>
 											

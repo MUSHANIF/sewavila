@@ -33,7 +33,7 @@ Route::delete('/hapus/{id}', [App\Http\Controllers\detailController::class, 'del
 Route::delete('/pesan/{id}', [App\Http\Controllers\detailController::class, 'pesan'])->name('pesan');
 Route::post('/pembayaran/{id}', [App\Http\Controllers\detailController::class, 'pembayaran'])->name('pembayaran');
 Route::post('/bayar/{id}', [App\Http\Controllers\detailController::class, 'bayar'])->name('bayar');
-Route::post('/redem/{id}', [App\Http\Controllers\detailController::class, 'redem'])->name('redem');
+Route::get('/redem/{id}', [App\Http\Controllers\detailController::class, 'redem'])->name('redem');
 
 Route::group(['middleware' => ['petugas']], function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);

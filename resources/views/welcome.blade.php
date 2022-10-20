@@ -68,7 +68,8 @@
     <section class="informasi" id="informasi">
         <div class="container">
             <div class="row">
-                <div data-aos="fade-right" class="col-12 col-lg-7 aos-init">
+                <div data-aos="fade-right" class="col-md-7 col-lg-7 col-sm-12
+                 aos-init">
                     <div class="info-about">
                         <h3 class="text-center text-lg-left">Kenapa kamu harus menyewa villa <br>  di Musvil ?</h3>
                         <p class="text-center text-lg-left">Musvil merupakan sebuah tempat dimana kamu bisa mencari tempat penyewaan villa di jawa barat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -101,30 +102,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-5">
-                    <div data-aos="fade-left" class="gambar d-none d-lg-block aos-init">
-                        <img class="ilustrasi-2" src="img/ilustrasi/ilustrasi-2.png" alt="">
+                <div class="col-6  col-lg-5">
+                    <div data-aos="fade-left" class="gambar ms-5 d-none d-lg-block aos-init">
+                        <img class="ilustrasi-2 " src="/images/images.jpg" alt="" style="">
                     </div>
                 </div>
             </div>
             <div data-aos="fade-up" class="row flex-column-reverse flex-lg-row mt-5 aos-init">
                 <div class="col-lg-6">
                     <div class="row mt-5">
+                        @foreach ($udin as $datas )
                         <div class="col-12 col-sm-4">
                             <div class="img-about-2">
-                                <img src="img/ilustrasi/owi.jpg" alt="">
+                                <img src="/assets/images/villa/{{ $data->image }}" alt="Gatot Kaca">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="img-about-2">
-                                <img src="img/ilustrasi/owi.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <div class="img-about-2">
-                                <img src="img/ilustrasi/owi.jpg" alt="">
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -149,15 +142,18 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="row produk-list">
+                    @foreach ($home as $home2 )
+                        
+                    
                         <div data-aos="flip-left" class="col-12 col-md-6 col-lg-6 aos-init">
-                            <a href="">
+                            <a href="{{ url('detail/'.$home2->id) }}">
                                 <div class="card">
                                     <div class="image">
-                                        <img src="img/produk/villa1.jpg" alt="Wayang Kulit Baratayudha">
+                                        <img src="/assets/images/villa/{{ $home2->image }}" alt="Gatot Kaca">
                                     </div>
                                     <div class="info">
-                                        <h3>Barata Yudha</h3>
-                                        <p>IDR 1,890,000</p>
+                                        <h3>{{ $home2->name }}</h3>
+                                        <p>IDR {{ number_format($home2->harga, 0, '', '.') }}/malam</p>
                                     </div>
                                     <div class="hover d-flex justify-content-center align-items-center">
                                         <div class="find">
@@ -167,24 +163,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div data-aos="flip-left" class="col-12 col-md-6 col-lg-6 aos-init">
-                            <a href="">
-                                <div class="card">
-                                    <div class="image">
-                                        <img src="img/produk/villa2.jpg" alt="Wayang Kulit Ramayana">
-                                    </div>
-                                    <div class="info">
-                                        <h3>Ramayana</h3>
-                                        <p>IDR 1,550,000</p>
-                                    </div>
-                                    <div class="hover d-flex justify-content-center align-items-center">
-                                        <div class="find">
-                                            <img src="img/icon/find.png" alt="search">
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                    @endforeach   
                     </div>
                 </div>
             </div>

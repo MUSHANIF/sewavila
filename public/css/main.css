@@ -201,14 +201,13 @@ header .illustration img {
   font-size: 18px;
 }
 
-.informasi .info-about .gambar {
-  width: 100%;
-}
 
-.informasi .info-about .gambar .ilustrasi-2 {
-  display: block;
-  float: right;
-  width: 100%;
+
+.informasi  .gambar .ilustrasi-2 {
+
+                float: right;
+                width: 100%;
+margin-left: 120px;
 }
 
 .informasi .img-about-2 {
